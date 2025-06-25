@@ -1,4 +1,4 @@
-<% if $ConsentModeEnabled && $AccountId || $GTMAccountId || $AccountV4IDs.Count() %>
+<% if $ConsentModeEnabled && $GTMAccountId || $AccountV4IDs.Count() %>
 <script>
 	// Google Consent Mode v2 - Initialize before any Google scripts
 	window.dataLayer = window.dataLayer || [];
@@ -19,15 +19,8 @@
 </script>
 <% end_if %>
 
-<% if $AccountId || $GTMAccountId %><script async <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics" data-<% end_if %>src="https://www.googletagmanager.com/gtag/js?id={$AccountId}"></script>
+<% if $GTMAccountId %><script async <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics" data-<% end_if %>src="https://www.googletagmanager.com/gtag/js?id={$GTMAccountId}"></script>
 <script <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics"<% end_if %>>
-	<% if $AccountId %>window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', '{$AccountId}', {
-		'anonymize_ip': true,
-		<% if $ConsentModeEnabled %>'cookie_flags': 'secure;samesite=lax'<% end_if %>
-	});<% end_if %>
 	<% if $GTMAccountId %>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -41,8 +34,8 @@
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
 	<% loop $AccountV4IDs %>gtag('config', '{$Item}', {
-		'anonymize_ip': true,
-		<% if $ConsentModeEnabled %>'cookie_flags': 'secure;samesite=lax'<% end_if %>
+		'anonymize_ip': true<% if $Up.ConsentModeEnabled %>,
+		'cookie_flags': 'secure;samesite=lax'<% end_if %>
 	});<% end_loop %>
 </script><% end_if %>
 

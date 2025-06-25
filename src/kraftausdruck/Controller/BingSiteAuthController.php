@@ -29,13 +29,13 @@ class BingSiteAuthController extends Controller
             return $this->httpError(404, 'Bing site verification file not configured or not found');
         }
 
-        $filename_relative  = $siteConfig->BingSiteAuthFile->Filename;
-        $filename_absolute  = $base . '/public/assets/' . $filename_relative;
+        $filenameRelative  = $siteConfig->BingSiteAuthFile->Filename;
+        $filenameAbsolute  = $base . '/public/assets/' . $filenameRelative;
 
         $this->getResponse()->addHeader("Content-Type", "text/xml; charset=utf-8");
 
-        if (file_exists($filename_absolute) && strtolower($siteConfig->BingSiteAuthFile->getExtension()) == 'xml') {
-            $file_content = file_get_contents($filename_absolute, true);
+        if (file_exists($filenameAbsolute) && strtolower($siteConfig->BingSiteAuthFile->getExtension()) == 'xml') {
+            $file_content = file_get_contents($filenameAbsolute, true);
             return $file_content;
         } else {
             return $this->httpError(404, 'Bing verification file not found or invalid format');

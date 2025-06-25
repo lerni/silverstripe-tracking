@@ -1,5 +1,5 @@
 ---
-Name: googleanalytics
+Name: silverstripe-tracking
 ---
 SilverStripe\CMS\Model\SiteTree:
   extensions:
@@ -15,7 +15,7 @@ SilverStripe\Control\Director:
 
 SilverStripe\MimeValidator\MimeUploadValidator:
   MimeTypes:
-    svg:
+    xml:
       - 'text/xml'
 
 SilverStripe\Assets\File:
@@ -23,4 +23,5 @@ SilverStripe\Assets\File:
     - xml
 
 # Kraftausdruck\Extensions\PageTrackingExtension:
-#   preconnect: 'true'
+  # track_members: false
+  # preconnect: true

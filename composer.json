@@ -1,12 +1,12 @@
 {
     "name": "lerni/silverstripe-tracking",
     "type": "silverstripe-vendormodule",
-    "description": "Google Analytics, Tag Manager & Microsoft Clarity Tracking Module for Silverstripe",
+    "description": "Tracking Module for Silverstripe: Analytics, Tag Manager & Clarity",
     "keywords": [
         "Silverstripe",
         "Google Analytics",
         "Google Tag Manager",
-        "Clarity",
+        "Microsoft Clarity",
         "Tracking"
     ],
     "homepage": "https://github.com/lerni/silverstripe-tracking",
@@ -18,7 +18,8 @@
     }],
     "require": {
         "silverstripe/framework": "^5.0",
-        "silverstripe/cms": "^5.0"
+        "silverstripe/cms": "^5.0",
+        "silverstripe/siteconfig": "^5.0"
     },
     "minimum-stability": "dev",
     "extra": {
