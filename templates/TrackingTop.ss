@@ -1,11 +1,6 @@
-<% if $ConsentModeEnabled && $GTMAccountId || $AccountV4IDs.Count() %>
-<script>
-	// Google Consent Mode v2 - Initialize before any Google scripts
+<% if $ConsentModeEnabled && $GTMAccountID || $AccountV4IDs.Count() %><script><%-- Google Consent Mode v2 - Initialize before any Google scripts --%>
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
-
-	<% if not $SiteConfig.CookieIsActive %>
-	// Set default consent state when no cookie consent management is active
 	gtag('consent', 'default', {
 		'ad_storage': 'denied',
 		'analytics_storage': 'denied',
@@ -15,29 +10,27 @@
 		'personalization_storage': 'denied',
 		'security_storage': 'granted'
 	});
-	<% end_if %>
-</script>
-
-<% if $GTMAccountId %><script <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="tag-manager"<% end_if %>>
-	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm-init'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','{$GTMAccountId}');
 </script><% end_if %>
 
-<% if $AccountV4IDs.Count() %><script async <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics" data-<% end_if %>src="https://www.googletagmanager.com/gtag/js?id={$AccountV4IDs.First().Item}"></script>
-<script <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics"<% end_if %>>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
+<% if $GTMAccountID %><script<% if $CookieIsActive %> type="text/plain" data-type="application/javascript" data-name="google-tag-manager"<% end_if %>>
+	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','{$GTMAccountID}');
+</script><% end_if %>
+
+<% if $AccountV4IDs.Count() %><script async <% if $CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics" data-<% end_if %>src="https://www.googletagmanager.com/gtag/js?id={$AccountV4IDs.First().Item}"></script>
+<script <% if $CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="google-analytics"<% end_if %>>
+<% if not $ConsentModeEnabled %>	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}<% end_if %>
 	gtag('js', new Date());
 	<% loop $AccountV4IDs %>gtag('config', '{$Item}', {
-		'anonymize_ip': true<% if $Up.ConsentModeEnabled %>,
-		'cookie_flags': 'secure;samesite=lax'<% end_if %>
+		'cookie_flags': 'secure;samesite=lax'
 	});<% end_loop %>
 </script><% end_if %>
 
-<% if $Clarity %><script <% if $SiteConfig.CookieIsActive %>type="text/plain" data-type="application/javascript" data-name="clarity"<% end_if %>>
+<% if $Clarity %><script<% if $CookieIsActive %> type="text/plain" data-type="application/javascript" data-name="clarity"<% end_if %>>
 	(function(c,l,a,r,i,t,y){
 		c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
 		t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;

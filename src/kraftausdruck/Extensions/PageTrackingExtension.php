@@ -22,28 +22,21 @@ class PageTrackingExtension extends Extension
 
         if (Director::isLive() && ($trackMembers || !$member)) {
             $siteConfig = $this->owner->SiteConfig;
-            $GTMAccountId = $siteConfig->GTMAccountID;
+
             $accountV4IDs = $this->perLine($siteConfig->GoogleAnalyticsAccountV4IDs);
-            $clarity = $siteConfig->Clarity;
-            $consentModeEnabled = $siteConfig->ConsentModeEnabled;
+            $siteConfig->AccountV4IDs = $accountV4IDs;
 
             $preconnect = Config::inst()->get(self::class, 'preconnect');
-            $arrayData = new ArrayData([
-                'GTMAccountId' => $GTMAccountId,
-                'AccountV4IDs' => $accountV4IDs,
-                'Clarity' => $clarity,
-                'ConsentModeEnabled' => $consentModeEnabled
-            ]);
 
             if ($preconnect === true) {
-                if (!empty($GTMAccountId) || !empty($accountV4IDs)) {
+                if (!empty($siteConfig->GTMAccountID) || !empty($accountV4IDs)) {
                     Requirements::insertHeadTags('<link rel="preconnect" href="https://www.googletagmanager.com">');
                 }
-                if (!empty($clarity)) {
+                if (!empty($siteConfig->Clarity)) {
                     Requirements::insertHeadTags('<link rel="preconnect" href="https://www.clarity.ms">');
                 }
             }
-            $trackingString = $arrayData->renderWith('TrackingTop');
+            $trackingString = $siteConfig->renderWith('TrackingTop');
             if ($trackingString) {
                 Requirements::insertHeadTags($trackingString);
             }
