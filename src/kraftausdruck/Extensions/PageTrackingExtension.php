@@ -43,7 +43,7 @@ class PageTrackingExtension extends Extension
                     Requirements::insertHeadTags('<link rel="preconnect" href="https://www.clarity.ms">');
                 }
             }
-            $trackingString = $arrayData->renderWith('Analytics');
+            $trackingString = $arrayData->renderWith('TrackingTop');
             if ($trackingString) {
                 Requirements::insertHeadTags($trackingString);
             }
