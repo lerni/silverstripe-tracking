@@ -2,8 +2,8 @@
 A Silverstripe module for Google Analytics, Google Tag Manager, Microsoft Clarity and Bing site verification. Features Consent Mode v2 support for privacy-compliant tracking, managed through Silverstripe's admin interface.
 
 ## Requirements
--   silverstripe/cms ^5
--   silverstripe/siteconfig ^5
+-   silverstripe/cms ^6
+-   silverstripe/siteconfig ^6
 
 ## Suggested
 -   lerni/klaro-cookie-consent
