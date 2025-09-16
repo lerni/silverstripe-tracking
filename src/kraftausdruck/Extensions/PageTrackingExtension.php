@@ -2,13 +2,13 @@
 
 namespace Kraftausdruck\Extensions;
 
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\Core\Extension;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\Control\Director;
 use SilverStripe\Security\Security;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Model\List\ArrayList;
 
 class PageTrackingExtension extends Extension
 {
