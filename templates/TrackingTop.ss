@@ -1,4 +1,4 @@
-<% if $ConsentModeEnabled && $GTMAccountID || $AccountV4IDs.Count() %><script><%-- Google Consent Mode v2 - Initialize before any Google scripts --%>
+<% if $ConsentModeEnabled %><% if $GTMAccountID || $AccountV4IDs.Count() %><script><%-- Google Consent Mode v2 - Initialize before any Google scripts --%>
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('consent', 'default', {
@@ -10,7 +10,7 @@
 		'personalization_storage': 'denied',
 		'security_storage': 'granted'
 	});
-</script><% end_if %>
+</script><% end_if %><% end_if %>
 
 <% if $GTMAccountID %><script<% if $CookieIsActive %> type="text/plain" data-type="application/javascript" data-name="google-tag-manager"<% end_if %>>
 	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
